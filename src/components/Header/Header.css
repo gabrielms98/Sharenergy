@@ -1,0 +1,22 @@
+.header-container {
+    display: flex;
+    justify-content: center;
+}
+
+.header {
+    width: 90vw;
+    height: 76px;
+    background: #F9F9F9;
+    border-radius: 8px;
+    margin-top: 20px;
+
+    padding: 10px 30px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.brand-logo {
+    width: 200px;
+}
