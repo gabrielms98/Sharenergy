@@ -1,0 +1,7 @@
+.powerplant-icon {
+    transform: scale(0.9);
+}
+
+.powerplant-icon:hover {
+    transform: scale(1); 
+}

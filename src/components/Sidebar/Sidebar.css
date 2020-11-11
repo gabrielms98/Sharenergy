@@ -1,11 +1,11 @@
 .sidebar-container {
-    height: 80vh;
+    height: 80%;
     width: 400px;
     background: #F9F9F9;
     border-radius: 8px;
 
     margin-top: 30px;
-    margin-left: 70px;
+    margin-left: 50px;
 }
 
 .sidebar-title {

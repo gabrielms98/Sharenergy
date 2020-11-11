@@ -17,9 +17,9 @@ const Sidebar = () => {
                 Minhas Usinas
             </div>
             <hr className="hr-title"/>
-            {powerPlants.map(p => (
+            {powerPlants.map((p, i) => (
                 <div>
-                    <SideBarListItem powerPlant={p}></SideBarListItem>
+                    <SideBarListItem powerPlant={p} key={i}></SideBarListItem>
                     <hr class="hr-item"/>
                 </div> 
             ))}
