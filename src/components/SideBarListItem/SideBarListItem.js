@@ -27,6 +27,12 @@ export const Button = styled.button`
     border: 1px solid #28a745;
     color: #28a745;
     padding: 0 20px;
+
+    &:hover {
+        background: #28a745;
+        color: #f9f9f9;
+        outline: none;
+    }
 `
 
 export const Avatar = styled.img`

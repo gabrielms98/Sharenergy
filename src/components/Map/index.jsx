@@ -3,24 +3,48 @@ import ReactMapGL, { Marker } from "react-map-gl";
 
 import { IconMarker, Svg } from './Map'
 
+import * as turf from '@turf/turf'
+import * as turfHelper from '@turf/helpers'
 const Map = () => {
 
     const [usinas, setUsinas] = useState([])
 
-    const [viewport, setViewport] = useState({
-        width: '100vw',
-        height: '100vh',
-        latitude: -19.9774226,
-        longitude: -43.9394392,
-        zoom: 12
-    });
+    const [viewport, setViewport] = useState({});
 
     const getMyPowerPlants = (powerPlantsThatIOwn) => {
         let allPowerPlants = require("../../api/infoUsina.json")
 
         allPowerPlants = allPowerPlants.filter(p => powerPlantsThatIOwn.some(number => number === p.numeroUsina))
-
         setUsinas(allPowerPlants)
+
+        const outline = allPowerPlants.map(p => [p.latitude, p.longitude])
+
+        console.log("OUTLINE 1", outline)
+
+        const polygon = turfHelper.multiPolygon([[outline]])
+        const centroid = turf.centroid(polygon)
+
+        const d = biggestDistance(allPowerPlants)
+
+        setViewport({
+            width: '100vw',
+            height: '100vh', 
+            latitude: centroid.geometry.coordinates[0],
+            longitude: centroid.geometry.coordinates[1],
+            zoom: normalize(d, 10, 0) * d%10
+        })       
+    }
+
+    const biggestDistance = (u) => {
+        const outline = u.map(p => [p.latitude, p.longitude])
+        
+        const line = turfHelper.lineString(outline)
+        const d = turf.length(line, {units: 'kilometers'})
+        return d
+    }
+
+    const normalize = (val, max, min) => {
+        return (val - min) / (max - min)
     }
 
     const goToPowerPlantInfo = (powerPlantNumber) => {
@@ -28,7 +52,7 @@ const Map = () => {
     }
 
     useEffect(() => {
-        getMyPowerPlants([1, 2, 3])
+        getMyPowerPlants([1, 2, 3, 4])
     }, {})
 
     return (

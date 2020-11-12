@@ -1,24 +1,16 @@
-import React from "react";
+import React from 'react'
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
 
-import Map from "./components/Map";
-import Header from './components/Header'
-import Sidebar from './components/Sidebar'
-
-import { Container, HeaderContainer, MapContainer, SidebarContainer } from './App'
+import LandingPage from './pages/LandingPage'
 
 const App = () => {
     return (
-        <Container>
-            <HeaderContainer >
-                <Header />
-            </HeaderContainer>
-            <SidebarContainer>
-                <Sidebar />
-            </SidebarContainer>
-            <MapContainer >
-                <Map />
-            </MapContainer>
-        </Container>
+        <Router >
+            <Switch>
+                <Route path='/' component={LandingPage}/>  
+                <Redirect from='*' to='/' />    
+            </Switch>
+        </Router>
     );
 };
 

@@ -18,8 +18,8 @@ const Sidebar = () => {
             </SidebarTitle>
             <HrTitle />
             {powerPlants.map((p, i) => (
-                <div>
-                    <SideBarListItem powerPlant={p} key={i}></SideBarListItem>
+                <div key={i}>
+                    <SideBarListItem powerPlant={p}></SideBarListItem>
                     <HrItem />
                 </div> 
             ))}
