@@ -1,6 +1,6 @@
 import React from 'react'
+import { SideBarListItemContainer, Row, P, Button, Avatar } from './SideBarListItem'
 
-import './SideBarListItem.css'
 import Selfie from '../../assets/self.png'
 
 const SideBarListItem = ({powerPlant}) => {
@@ -8,24 +8,46 @@ const SideBarListItem = ({powerPlant}) => {
     const avatars = [1, 2, 3]
 
     return (
-        <div className="sidebaritem-container my-2">
-            <div className="row w-100">
-                <div className="item-title col-8">
-                    <div className="row">
-                        <h4 className="mb-0">{powerPlant.name}</h4>
+        <SideBarListItemContainer>
+            <Row>
+                <div>
+                    <h4>{powerPlant.name}</h4>
+                    <div>
+                        <P>Owned by: <b>{powerPlant.owner}</b></P>
                     </div>
-                    <div className="row">
-                        <p className="mb-0 item-subtitle">Owned by: <b>{powerPlant.owner}</b></p>
-                    </div>
-                    <div className="row">
-                        {avatars.map(a => <img src={Selfie} className="rounded-circle avatars" width="15"></img>)}
+                    <div>
+                        {avatars.map(a => <Avatar src={Selfie} className="rounded-circle avatars" width="15"></Avatar>)}
                     </div>
                 </div>
-                <div className="col-4 mr-0 pr-0 d-flex justify-content-end align-items-center">
-                    <button className="btn btn-outline-success action-button py-0">Ver</button>
+                <div style={{ 
+                    display: 'flex',
+                    alignItems: 'center'
+                }}>
+                    <Button>Ver</Button>
                 </div>
-            </div>
-        </div>
+            </Row>
+            
+        </SideBarListItemContainer>
+
+
+        // <div className="sidebaritem-container my-2">
+        //     <div className="row w-100">
+        //         <div className="item-title col">
+        //             <div className="row">
+        //                 <h4 className="mb-0">{powerPlant.name}</h4>
+        //             </div>
+        //             <div className="row">
+        //                 <p className="mb-0 item-subtitle">Owned by: <b>{powerPlant.owner}</b></p>
+        //             </div>
+        //             <div className="row">
+        //                 {avatars.map(a => <img src={Selfie} className="rounded-circle avatars" width="15"></img>)}
+        //             </div>
+        //         </div>
+        //         <div className="col-4 mr-0 pr-0 d-flex justify-content-end align-items-center">
+        //             <button className="btn btn-outline-success action-button py-0">Ver</button>
+        //         </div>
+        //     </div>
+        // </div>
     );
 }
 

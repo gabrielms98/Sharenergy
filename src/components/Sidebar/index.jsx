@@ -1,7 +1,7 @@
 import React from 'react'
 import SideBarListItem from '../SideBarListItem'
 
-import './Sidebar.css'
+import { SidebarContainer, SidebarTitle, HrTitle, HrItem } from './Sidebar'
 
 const powerPlants = [
     {name: 'Usina 1', owner: 'Gabriel Martins'},
@@ -12,18 +12,18 @@ const powerPlants = [
 const Sidebar = () => {
 
     return (
-        <div className="sidebar-container">
-            <div className="sidebar-title">
+        <SidebarContainer >
+            <SidebarTitle>
                 Minhas Usinas
-            </div>
-            <hr className="hr-title"/>
+            </SidebarTitle>
+            <HrTitle />
             {powerPlants.map((p, i) => (
                 <div>
                     <SideBarListItem powerPlant={p} key={i}></SideBarListItem>
-                    <hr class="hr-item"/>
+                    <HrItem />
                 </div> 
             ))}
-        </div>
+        </SidebarContainer>
     );
 }
 

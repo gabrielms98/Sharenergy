@@ -1,19 +1,20 @@
 import React from 'react'
-import './Header.css'
+
+import { HeaderContainer, HeaderContent } from './Header'
 
 import BrandLogo from '../../assets/Brand logo.png'
 import Selfie from '../../assets/self.png'
 
 const Header = () => {
     return (
-        <div className="header-container">
-            <div className="header">
+        <HeaderContainer >
+            <HeaderContent >
                 <img src={BrandLogo} className="brand-logo"/>
                 <div>
                     <img src={Selfie} alt=""/>
                 </div>
-            </div>
-        </div>
+            </HeaderContent>
+        </HeaderContainer>
     )
 }
 
