@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 
 import { Container, HeaderContainer, MapContainer, SidebarContainer } from './LandingPage'
 
@@ -8,17 +8,27 @@ import Map from '../../components/Map'
 
 
 const LandingPage = () => {
+
+    const [openDashboard, setOpenDashboard] = useState(false)
+
+    const handler = () => {
+        setOpenDashboard(!openDashboard)
+
+    }
+
     return (
         <Container>
             <HeaderContainer >
                 <Header />
             </HeaderContainer>
-            <SidebarContainer>
-                <Sidebar />
+            <SidebarContainer toggle={openDashboard} >
+                <Sidebar toggle={openDashboard} action={handler}/>
             </SidebarContainer>
-            <MapContainer >
-                <Map />
-            </MapContainer>
+           { !openDashboard ?  
+                <MapContainer >
+                        <Map />
+                </MapContainer>
+            : ''}
         </Container>
     )
 }

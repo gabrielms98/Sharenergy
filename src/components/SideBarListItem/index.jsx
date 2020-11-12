@@ -3,9 +3,13 @@ import { SideBarListItemContainer, Row, P, Button, Avatar } from './SideBarListI
 
 import Selfie from '../../assets/self.png'
 
-const SideBarListItem = ({powerPlant}) => {
+const SideBarListItem = ({powerPlant, action}) => {
 
     const avatars = [1, 2, 3]
+
+    const dashBoardPowerPlant = () => {
+
+    }
 
     return (
         <SideBarListItemContainer>
@@ -23,7 +27,7 @@ const SideBarListItem = ({powerPlant}) => {
                     display: 'flex',
                     alignItems: 'center'
                 }}>
-                    <Button>Ver</Button>
+                    <Button onClick={action}>Ver</Button>
                 </div>
             </Row>
             

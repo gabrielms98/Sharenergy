@@ -30,4 +30,13 @@ export const SidebarContainer = styled.div`
 
     top: 100px;
     height: 90vh;
+
+    -webkit-transition: width 1s ease-in-out;
+    -moz-transition: width 1s ease-in-out;
+    -o-transition: width 1s ease-in-out;
+    transition: width 1s ease-in-out;
+
+    ${props => {
+        return props.toggle ? `width: calc(100% - 60px)` : `width: 400px;`;
+    }}
 `
