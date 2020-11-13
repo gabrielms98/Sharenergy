@@ -39,7 +39,7 @@ export const MoneyContainer = styled.div`
     height: 15vh;
 
     background: white;
-    padding: 30px 20px;
+    padding: 30px 30px;
 
     border-radius: 16px; 
     box-shadow: 0.1em 0.1em 0.2em rgba(0,0,0,0.15);   
