@@ -1,54 +1,48 @@
-import React, {useEffect, useState} from 'react'
+import React, { useState, useEffect } from 'react'
 import SideBarListItem from '../SideBarListItem'
+import Dashboard from '../Dashboard'
 
 import { SidebarContainer, SidebarTitle, HrTitle, HrItem } from './Sidebar'
+import Usinas from '../../api/infoUsina.json'
 
-const powerPlants = [
-    {name: 'Usina 1', owner: 'Gabriel Martins'},
-    {name: 'Usina 2', owner: 'Gabriel Martins'},
-    {name: 'Usina 3', owner: 'Gabriel Martins'},
-]
+const Sidebar = ({toggle, action, completed, usuario}) => {
 
-const Sidebar = ({toggle, action}) => {
-
-    const [openDashboard, setOpenDashboard] = useState(false)
-
-    const [actionEnded, setActionEnded] = useState(true)
-
-    useEffect(() => {
-        console.log("TOGGLE", toggle)
-    })
+    const [openDashboard, setOpenDashboard] = useState(toggle)
+    const [powerPlants, setPowerPlants] = useState([])
 
     const handler = () => {
-        setActionEnded(false)
         action()
 
         setOpenDashboard(!openDashboard)
-
-        setTimeout(() => {
-            setActionEnded(true)
-        }, 1000)
     }
+
+    const getMyUsinas = (usinas) => {
+        const myUsinas = Usinas.filter(u => usinas && usinas.some(us => us.numeroUsina === u.numeroUsina))
+        console.log(myUsinas)
+        setPowerPlants(myUsinas)
+    }
+
+    useEffect(() => {
+        getMyUsinas(usuario.usinas)
+    }, [usuario])
 
     return (
         <SidebarContainer toggle={toggle}>
-            { !openDashboard && actionEnded ? 
+            { !toggle && completed ? 
                 <div>
                     <SidebarTitle>
                         Minhas Usinas
                     </SidebarTitle>
                     <HrTitle />
-                    {powerPlants.map((p, i) => (
-                        <div key={i}>
-                            <SideBarListItem powerPlant={p} action={handler}></SideBarListItem>
-                            <HrItem />
+                    {powerPlants && powerPlants.map((p, i) => (
+                        <div>
+                            <SideBarListItem key={i.toString()} powerPlant={p} action={handler}></SideBarListItem>
+                            <HrItem/>
                         </div> 
                     ))}
                 </div>
-            : actionEnded ?
-            <div>
-                <button onClick={handler}>VOLTAR</button>  
-            </div> 
+            : completed ?
+                <Dashboard action={handler} usuario={usuario} usina={1}/>
             : ''   
             }
         </SidebarContainer>

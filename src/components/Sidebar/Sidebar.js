@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const SidebarContainer = styled.div`
-    height: 80%;
+    height: 85%;
     width: 400px;
     background: #F9F9F9;
     border-radius: 8px;
@@ -9,9 +9,7 @@ export const SidebarContainer = styled.div`
     margin-left: 30px;
     margin-top: 40px;
 
-    -webkit-box-shadow: 10px 10px 5px -8px rgba(0,0,0,0.75);
-    -moz-box-shadow: 10px 10px 5px -8px rgba(0,0,0,0.75);
-    box-shadow: 10px 10px 5px -8px rgba(0,0,0,0.75);
+    box-shadow: 0.1em 0.1em 0.2em rgba(0,0,0,0.15);
 
     -webkit-transition: width 1s ease-in-out, padding-left 1s ease-in-out, padding-right 1s ease-in-out;
     -moz-transition: width 1s ease-in-out, padding-left 1s ease-in-out, padding-right 1s ease-in-out;

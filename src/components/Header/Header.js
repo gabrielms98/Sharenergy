@@ -20,7 +20,13 @@ export const HeaderContent = styled.div`
     align-items: center;
     justify-content: space-between;
 
-    -webkit-box-shadow: 10px 10px 5px -8px rgba(0,0,0,0.75);
-    -moz-box-shadow: 10px 10px 5px -8px rgba(0,0,0,0.75);
-    box-shadow: 10px 10px 5px -8px rgba(0,0,0,0.75);
+    box-shadow: 0.1em 0.1em 0.2em rgba(0,0,0,0.15);
+`
+
+export const Icon = styled.img`
+    width: 24px;
+    height: 24px;
+
+    margin-right: 15px;
+    cursor: pointer;
 `

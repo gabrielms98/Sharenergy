@@ -26,6 +26,10 @@
             {
                 "numeroUsina": 1,
                 "percentualUsina": 50
+            },
+            {
+                "numeroUsina": 2,
+                "percentualUsina": 10
             }
         ]
     }

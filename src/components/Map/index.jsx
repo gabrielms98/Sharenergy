@@ -5,6 +5,7 @@ import { IconMarker, Svg } from './Map'
 
 import * as turf from '@turf/turf'
 import * as turfHelper from '@turf/helpers'
+
 const Map = () => {
 
     const [usinas, setUsinas] = useState([])
@@ -53,7 +54,7 @@ const Map = () => {
 
     useEffect(() => {
         getMyPowerPlants([1, 2, 3, 4])
-    }, {})
+    }, [])
 
     return (
         <ReactMapGL
@@ -63,9 +64,10 @@ const Map = () => {
             onViewportChange={nextViewport => setViewport(nextViewport)}
         >   
             {
-                usinas.map(usina => (
+                usinas.map((usina, i) => (
                     <div 
                         onClick={() => goToPowerPlantInfo(usina.numeroUsina)}
+                        key={i}
                     >
                         <Marker
                             latitude={usina.latitude}

@@ -15,7 +15,7 @@ const SideBarListItem = ({powerPlant, action}) => {
         <SideBarListItemContainer>
             <Row>
                 <div>
-                    <h4>{powerPlant.name}</h4>
+                    <h4>{powerPlant.nome}</h4>
                     <div>
                         <P>Owned by: <b>{powerPlant.owner}</b></P>
                     </div>
