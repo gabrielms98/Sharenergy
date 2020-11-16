@@ -1,4 +1,6 @@
-import React from 'react'
+import React, { useContext } from 'react'
+
+import { store } from '../../store'
 
 import { Link } from 'react-router-dom'
 
@@ -8,7 +10,17 @@ import BrandLogo from '../../assets/Brand logo.png'
 import Selfie from '../../assets/self.png'
 import MapIcon from '../../assets/map.svg'
 
-const Header = ({action, openedDashboard}) => {
+const Header = () => {
+
+    const { state, dispatch } = useContext(store)
+
+    const closeDashboard = () => {
+
+        dispatch({type: 'toggle'})
+
+        setTimeout(() => dispatch({type: 'endAction'}), 1000)
+    }
+
     return (
         <HeaderContainer >
             <HeaderContent >
@@ -16,7 +28,7 @@ const Header = ({action, openedDashboard}) => {
                     <img src={BrandLogo}/>
                 </Link>
                 <div>
-                    { openedDashboard ? <Icon src={MapIcon} onClick={action} /> : ''}
+                    { state.openDashboard ? <Icon src={MapIcon} onClick={() => { closeDashboard()} } /> : ''}
                     <img src={Selfie} alt=""/>
                 </div>
             </HeaderContent>

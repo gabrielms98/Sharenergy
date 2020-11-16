@@ -1,24 +1,20 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import SideBarListItem from '../SideBarListItem'
 import Dashboard from '../Dashboard'
+
+import { store } from '../../store'
 
 import { SidebarContainer, SidebarTitle, HrTitle, HrItem } from './Sidebar'
 import Usinas from '../../api/infoUsina.json'
 
-const Sidebar = ({toggle, action, completed, usuario}) => {
+const Sidebar = ({completed, usuario}) => {
 
-    const [openDashboard, setOpenDashboard] = useState(toggle)
+    const { state, dispatch } = useContext(store)
+
     const [powerPlants, setPowerPlants] = useState([])
-
-    const handler = () => {
-        action()
-
-        setOpenDashboard(!openDashboard)
-    }
 
     const getMyUsinas = (usinas) => {
         const myUsinas = Usinas.filter(u => usinas && usinas.some(us => us.numeroUsina === u.numeroUsina))
-        console.log(myUsinas)
         setPowerPlants(myUsinas)
     }
 
@@ -27,8 +23,8 @@ const Sidebar = ({toggle, action, completed, usuario}) => {
     }, [usuario])
 
     return (
-        <SidebarContainer toggle={toggle}>
-            { !toggle && completed ? 
+        <SidebarContainer toggle={state.openDashboard}>
+            { !state.openDashboard && state.actionCompleted ? 
                 <div>
                     <SidebarTitle>
                         Minhas Usinas
@@ -36,13 +32,13 @@ const Sidebar = ({toggle, action, completed, usuario}) => {
                     <HrTitle />
                     {powerPlants && powerPlants.map((p, i) => (
                         <div>
-                            <SideBarListItem key={i.toString()} powerPlant={p} action={handler}></SideBarListItem>
+                            <SideBarListItem key={i.toString()} powerPlant={p} ></SideBarListItem>
                             <HrItem/>
                         </div> 
                     ))}
                 </div>
-            : completed ?
-                <Dashboard action={handler} usuario={usuario} usina={1}/>
+            : state.actionCompleted ?
+                <Dashboard usuario={usuario} usina={1}/>
             : ''   
             }
         </SidebarContainer>
