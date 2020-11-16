@@ -1,16 +1,13 @@
 import React, { useEffect, useState } from "react";
-import ReactMapGL, { Marker } from "react-map-gl";
+import ReactMapGL, { Marker, WebMercatorViewport } from "react-map-gl";
 
 import { IconMarker, Svg } from './Map'
-
-import * as turf from '@turf/turf'
-import * as turfHelper from '@turf/helpers'
 
 const Map = () => {
 
     const [usinas, setUsinas] = useState([])
 
-    const [viewport, setViewport] = useState({});
+    const [viewport, setViewport] = useState({})
 
     const getMyPowerPlants = (powerPlantsThatIOwn) => {
         let allPowerPlants = require("../../api/infoUsina.json")
@@ -18,34 +15,15 @@ const Map = () => {
         allPowerPlants = allPowerPlants.filter(p => powerPlantsThatIOwn.some(number => number === p.numeroUsina))
         setUsinas(allPowerPlants)
 
-        const outline = allPowerPlants.map(p => [p.latitude, p.longitude])
+        const line = allPowerPlants.map(p => [p.longitude, p.latitude])
 
-        console.log("OUTLINE 1", outline)
+        const v = new WebMercatorViewport({width: 1920, height: 1080})
+            .fitBounds(line, {
+                padding: 450,
+                offset: [200, 0]
+            })
 
-        const polygon = turfHelper.multiPolygon([[outline]])
-        const centroid = turf.centroid(polygon)
-
-        const d = biggestDistance(allPowerPlants)
-
-        setViewport({
-            width: '100vw',
-            height: '100vh', 
-            latitude: centroid.geometry.coordinates[0],
-            longitude: centroid.geometry.coordinates[1],
-            zoom: normalize(d, 10, 0) * d%10
-        })       
-    }
-
-    const biggestDistance = (u) => {
-        const outline = u.map(p => [p.latitude, p.longitude])
-        
-        const line = turfHelper.lineString(outline)
-        const d = turf.length(line, {units: 'kilometers'})
-        return d
-    }
-
-    const normalize = (val, max, min) => {
-        return (val - min) / (max - min)
+        setViewport(v)        
     }
 
     const goToPowerPlantInfo = (powerPlantNumber) => {
@@ -62,6 +40,8 @@ const Map = () => {
             mapStyle="mapbox://styles/mapbox/streets-v11"
             mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
             onViewportChange={nextViewport => setViewport(nextViewport)}
+            width="100vw"
+            height="100vh"
         >   
             {
                 usinas.map((usina, i) => (

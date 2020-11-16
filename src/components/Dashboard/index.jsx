@@ -53,7 +53,7 @@ const Dashboard = ({usuario, usina}) => {
         <div>
           <MoneyContainer>
             <Img src={MoneyUp}></Img>
-            <MoneyText>R$ 110,00</MoneyText>
+            <MoneyText>R$ {(dE * 0.95).toFixed(2)}</MoneyText>
           </MoneyContainer>
           <HistoryContainer>
             <HistoryText>
