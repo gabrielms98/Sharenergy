@@ -121,4 +121,32 @@ export const Value = styled.div`
     display: flex;
     text-align: right;
     opacity: 0.7;
+
+    ${props => {
+        return props.size ? `font-size: ${props.size}; align-items: bottom;` : ``;
+    }}
+`
+
+export const ButtonGroup = styled.div`
+    display: flex;
+    justify-content: space-between;
+    padding: 30px 10% 0 10%;
+`
+
+export const ButtonInterest = styled.button`
+    background: transparent;
+    outline: none;
+    border: none;
+    color: #2F2E41;
+
+    padding: 0 15px;
+    
+    &:focus{
+        outline: none;   
+    }
+
+    ${props => {
+        return props.selected ? `color: #FF6349; border-radius: 16px; border 1px solid #FF6349;` : ``;
+    }}
+
 `
