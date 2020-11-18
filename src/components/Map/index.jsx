@@ -3,7 +3,13 @@ import ReactMapGL, { Marker, WebMercatorViewport } from "react-map-gl";
 
 import { IconMarker, Svg } from './Map'
 
+const { 
+    REACT_APP_MAPBOX_TOKEN
+} = process.env
+
 const Map = () => {
+
+    const TOKEN = REACT_APP_MAPBOX_TOKEN || 'pk.eyJ1IjoiZ2FicmllbG1zOTgiLCJhIjoiY2toY204enYzMDNzdzJxc2Jya2t6cmdvMSJ9.Q7ei8ttMrTSR6bRxs94_8A'
 
     const [usinas, setUsinas] = useState([])
 
@@ -38,7 +44,7 @@ const Map = () => {
         <ReactMapGL
             {...viewport}
             mapStyle="mapbox://styles/mapbox/streets-v11"
-            mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
+            mapboxApiAccessToken={TOKEN}
             onViewportChange={nextViewport => setViewport(nextViewport)}
             width="100vw"
             height="100vh"
